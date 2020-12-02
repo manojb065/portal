@@ -5,10 +5,9 @@
 
         <div class="card" style="margin: 8px;">
             <div class="card-body">
-                <h4 class="card-title" style="color: rgb(14,13,13);">{{ i.name }}</h4>
-                <h4 class="card-subtitle " style="color: rgb(14,13,13);">{{ i.title }}</h4>
-                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ i.leader }}</h4>
-                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ i.member }}</h4>
+                <p class="card-text" style="font-size: 40px;"><strong><em>{{ i.name }} / {{ i.title }}</em></strong>&nbsp;</p>
+<!--                <p style="font-size: 23px;"><strong>Our team {{ i.name }}</strong></p>-->
+                <p><i class="fa fa-user"></i>&nbsp;{{ i.leader }}</p>
                 <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' i.name %}'">View</button>
                 {% if request.user.username == i.leader.username %}
                 <button class="btn btn-danger"  type="button" onclick="location.href='{% url 'team:teamdel' i.id %}'">Delete</button>
@@ -18,10 +17,9 @@
         {% if j %}
            <div class="card" style="margin: 8px;">
             <div class="card-body">
-                <h4 class="card-title" style="color: rgb(14,13,13);">{{ j.name }}</h4>
-                <h4 class="card-subtitle " style="color: rgb(14,13,13);">{{ j.title }}</h4>
-                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ j.leader }}</h4>
-                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ j.member }}</h4>
+                <p class="card-text" style="font-size: 40px;"><strong><em>{{ j.name }} / {{ j.title }}</em></strong>&nbsp;</p>
+<!--                <p style="font-size: 23px;"><strong>Our team {{ j.name }}</strong></p>-->
+                <p><i class="fa fa-user"></i>&nbsp;{{ j.leader }}</p>
                 <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' j.name %}'">View</button>
                 {% if request.user.username == j.leader.username %}
                 <button class="btn btn-danger" type="button" onclick="location.href='{% url 'team:teamdel' j.id %}'">Delete</button>

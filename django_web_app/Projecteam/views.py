@@ -19,13 +19,11 @@ def TeamCreate(request):
             db.save()
             dbf=projectFiles(user=db,file=form.cleaned_data['file'])
             dbf.save()
-
-
             return redirect("team:list")
     userteam=projectdb.objects.filter(Q(member__contains=[request.user])|Q(leader=request.user))
     form=TeamCreations()
     context={'list':form.choose,'form':form}
-    return render(request,"Projecteam/createTeam.html",context)
+    return render(request,"Projecteam/project.html",context)
 
 def TeamList(request):
     projects=projectdb.objects.filter(status=True)

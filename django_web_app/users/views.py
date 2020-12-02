@@ -4,8 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 from django.contrib.auth import login,authenticate
 import requests
-import json
-from blog.models import GithubRespo
+import datetime
+from blog.models import gitrep as GithubRespo
 
 def Login(request):
     if request.method=="POST":
@@ -45,12 +45,12 @@ def profile(request):
                                    instance=request.user.profile)
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
-            yoko = requests.get('https://api.github.com/users/%s/repos' %p_form.cleaned_data.get('github'))
-
+            user=p_form.cleaned_data.get('github')
+            yoko = requests.get('https://api.github.com/users/%s/repos' %user)
             for j in yoko.json():
-                print(j['archive_url'],"***",j['name'],"***",j['created_at'],"***",j['contents_url'])
-                # k=requests.get('https://api.github.com/users/%s/repos' % p_form.cleaned_data.get('github'))
-            #     GithubRespo(profile=request.user.profile,Repso=j)
+                a_url='https://api.github.com/repos/{u}/{k}/zipball/master'.format(u=user,k=j['name'])
+                c_url= "https://api.github.com/repos/{}/{}/git/trees/master?recursive=1".format(p_form.cleaned_data.get('github'), j['name'])
+                GithubRespo(profile=request.user.profile,respo=j['name'],files=c_url ,download=a_url,time=j['created_at'][:10] ).save()
             p_form.save()
 
             messages.success(request, f'Your account has been updated!')

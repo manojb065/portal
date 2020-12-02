@@ -6,7 +6,8 @@ from .views import (
     PostUpdateView,
     PostDeleteView,
     UserPostListView,
-    AddComments
+    AddComments,
+  about
 )
 from . import views
 
@@ -20,4 +21,5 @@ urlpatterns = [
     path('media/Files/<int:pk>',PostDeleteView.as_view(),name='post-delete' ),
     path('search/',views.search,name='search' ),
     path('comment/<int:pk>',AddComments,name='comments'),
+path('about/',about),
 ]

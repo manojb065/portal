@@ -1,0 +1,55 @@
+.team-box{
+   border:1px solid black;
+    height: 550px;
+    width:320px;
+    position: absolute;
+    margin:auto;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+}
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 30px;
+}
+.team-box input{
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+}
+.team-box input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.team-box input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+input[type="checkbox"]{
+    vertical-align:middle;
+}
+label{
+    color: black;
+    font-size: 24px;
+    font-family: 'poppins',sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+}
+

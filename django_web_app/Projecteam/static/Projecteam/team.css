@@ -1,0 +1,92 @@
+.team-box{
+   border:1px solid black;
+    height: 500px;
+    width:320px;
+    position: absolute;
+    margin:auto;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+}
+h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+.team-box input{
+    width: 100%;
+    margin-bottom: 20px;
+    border: none;
+    border-bottom: 1px solid black;
+    outline: none;
+    height: 40px;
+    color: black;
+    font-size: 16px;
+}
+.team-box input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.team-box input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+input[type="checkbox"]{
+    appearance:none;
+    -webkit-appearance:none;
+    height:30px;
+    width:30px;
+    background-color: #d5d5d5;
+    border-radius: 5px;
+    cursor: pointer;
+    display:flex;
+    align-items: flex-start;
+    justify-content: center;
+    outline: none;
+    vertical-align:middle;
+
+}
+label{
+    color: black;
+    font-size: 24px;
+    font-family: 'poppins',sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+}
+input[type="checkbox"]:after{
+    font-family: "Font Awesome 5 Free";
+    content: "\f00c";
+    font-size: 50px;
+    color: black;
+    display: none;
+}
+input[type="checkbox"]:hover{
+    background-color: #a5a5a5;
+}
+input[type="checkbox"]:checked{
+    background-color: #5bcd3e;
+}
+input[type="checkbox"]:checked:after{
+    display: block;
+}
+li{
+    list-style:none;
+
+}
+
+
+label,input{
+    display: inline-block;
+    vertical-align: middle;
+}

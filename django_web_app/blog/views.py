@@ -14,7 +14,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
-from .models import Post
+from .models import Post,gitrep
 import os
 from django.urls import reverse_lazy
 from django.contrib.staticfiles.views import serve
@@ -121,3 +121,10 @@ def AddComments(request,pk):
         c=Comments(usr=request.user,post=postc[0],com=request.GET['com'])
         c.save()
     return redirect('post-detail', pk=pk)
+
+def about(request):
+    context = {
+        'posts': Post.objects.all(),
+        'git': gitrep.objects.all()
+    }
+    return render(request, 'blog/about.html', context)
