@@ -1,0 +1,56 @@
+{% extends "Projecteam/base.html" %}
+{% block content %}
+{% for i,j in page_obj %}
+    <div class="card-group" style="padding: 0px;">
+
+        <div class="card" style="margin: 8px;">
+            <div class="card-body">
+                <h4 class="card-title" style="color: rgb(14,13,13);">{{ i.name }}</h4>
+                <h4 class="card-subtitle " style="color: rgb(14,13,13);">{{ i.title }}</h4>
+                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ i.leader }}</h4>
+                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ i.member }}</h4>
+                <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' i.name %}'">View</button>
+
+                </div>
+                </div>
+
+        {% if j %}
+           <div class="card" style="margin: 8px;">
+            <div class="card-body">
+                <h4 class="card-title" style="color: rgb(14,13,13);">{{ j.name }}</h4>
+                <h4 class="card-subtitle " style="color: rgb(14,13,13);">{{ j.title }}</h4>
+                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ j.leader }}</h4>
+                <h4 class="card-subtitle text-muted" style="color: rgb(14,13,13);">{{ j.member }}</h4>
+                <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' i.name %}'">View</button>
+
+
+                </div>
+       </div>
+       {% endif %}
+
+
+    </div>
+    {% endfor %}
+
+{% if page_obj %}
+
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="jumbotron mt-3 shadow-lg">
+<article class="media content-section shadow ">
+   <a href="{{ object.author.profile.image.url }} " target="_blank"> <img src="{{ object.author.profile.image.url }}  " alt="" class="article-img rounded-circle img-thumbnail img-fluid">
+   </a>
+    <div class="media-body">
+      <div class="">
+        <div class="d-flex justify-content-between">
+        <a class="mr-2 mt-0 mb-0  text-dark" href="{% url 'user-posts' object.author.username  %}"><h3>{{ object.author }}</h3></a>
+        <small class="text-muted  text-align-right">{{ object.date_upload }}</small>
+        </div>
+        {% if object.author != user %}
+          <div class="form-group mt-0 pt-0 d-flex justify-content-end">          
+            <a href="{{ object.file.url }}" download class="btn btn-primary flex-last" type="submit"><i class="fas fa-download"></i> Downlaod</a>
+          </div>
+        {% endif %}
+        <hr>
+        {% if object.author == user %}
+          <div>
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+            <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <div>
+        {% if object.file %}
+          {% if object.extension == '.jpg' or object.extension == 'jpeg' or object.extension == 'png' %}
+            <a href="{{ object.file.url }}"  download ><img src="{{ object.file.url }}" alt="" class="img-fluid "></a>
+            <a href="{{ object.file.url }}"  download class="text-dark"><h5>{{ object.file }}</h5></a>
+          {% elif object.extension == '.mp4' %}
+            <div class="embed-responsive embed-responsive-16by9">
+              <video id="video-1_html_api" class="vjs-tech" preload="auto" autoplay >
+                <source src="{{ object.file.url }}" type="video/mp4" class="embed-responsive">
+              </video>
+            </div>
+            <a href="{{ object.file.url }}"  download class="text-dark"><h5>{{ object.file }}</h5></a>
+          {% else %}
+            <a href="{{ object.file.url }}"  download class="text-dark"><h5>{{ object.file }}</h5></a>
+          {% endif %}
+        {% endif %}
+      </div>
+      <h2>{{ object.title }}</h2>
+      <p class="article-content">{{ object.content }}</p>
+    </div>
+  </article>
+
+
+  <div class="container">
+<div class="row bootstrap snippets bootdeys">
+    <div class="col-md-8 col-sm-12">
+        <div class="comment-wrapper">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                   <h3><strong>Comment</strong></h3>
+                </div>
+                <div class="panel-body">
+                    {% if not user.is_anonymous %}
+                    <form method="get" action="{% url 'comments' object.id %}">{% csrf_token %}
+                    <textarea class="form-control" placeholder="write a comment..." rows="3" name="com"></textarea>
+                    <br>
+                    <button type="submit" class="btn btn-info pull-right">Post</button>
+                        </form>
+                    {% endif %}
+                    <div class="clearfix"></div>
+                    <hr>
+                  {% if not object.comments.all %}
+  No comments yet ..
+  {% else %}
+  {% for comment in object.comments.all  %}
+
+                    <ul class="media-list">
+                        <li class="media">
+
+                            <div class="media-body">
+                                <span class="text-muted pull-right">
+                                    <small class="text-muted">{{ comment.time }}</small>
+                                </span>
+                                <strong class="text-success">{{ comment.usr }}</strong>
+                                <p>
+                                    {{ comment.com }}
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                    <hr>
+  {% endfor %}
+ {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock content %}

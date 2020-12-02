@@ -1,0 +1,52 @@
+{% extends "Projecteam/base.html" %}
+{% block content %}
+    <h1>{{ details.name }}</h1>
+    <h2  >{{ details.title }}</h2>
+    <h2>{{ details.leader }}</h2>
+    <h4>{{ details.member }}</h4>
+
+
+
+
+
+<div class="card" style="width: 18rem;">
+  <div class="card-header">
+    Files
+  </div>
+  <ul class="list-group list-group-flush">
+      {% for i,j in files %}
+
+      {% if j.file %}
+    <li class="list-group-item" >
+        <a href="{{ j.file.url }}" > {{ i }} </a>
+    {% if lead %}
+      <a href="{% url 'team:del' details.name  %}" class="btn btn-danger" style="height:30px;margin-left:50px;padding-top:2px;">delete</a>
+      {% endif %}
+    </li>
+
+      {% endif %}
+
+  {% endfor %}
+  </ul>
+</div>
+    {% if mem %}
+    <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    upload
+  </button>
+</p>
+    {% endif %}
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+<form    action="{% url 'team:upload'  details.name %}" method="post" enctype="multipart/form-data"> {% csrf_token %}
+                    <input id="id_file" name="file" type="file"  placeholder="Search Here..." />
+    <input type="submit" class="btn btn-warning"/>
+</form>
+
+  </div>
+</div>
+{% load comment_tags %}  {# Loading the template tag #}
+
+{% render_comments details request %}  {# Include comments belonging to a certain object #}
+{% include_static %}
+{% endblock %}

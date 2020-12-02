@@ -1,0 +1,21 @@
+{% extends "Projecteam/base2.html" %}
+{% block content %}
+<center>
+
+        <form method="POST" enctype="multipart/form-data" > {% csrf_token %}
+        {{ form.as_p }}
+      <select class="user" id="idOfFirstSelect" name="members" multiple style="width: 30%">
+        {% for i,j in list %}
+        <option value={{i}}>{{j}}</option>-->
+        {% endfor %}
+      </select>
+            <br>
+        <input type="submit">
+    </div>
+          <!-- Default disabled -->
+
+
+        </form>
+
+    </center>
+{% endblock %}
