@@ -47,7 +47,9 @@ def profile(request):
             u_form.save()
             yoko = requests.get('https://api.github.com/users/%s/repos' %p_form.cleaned_data.get('github'))
 
-            # for j in yoko.json():
+            for j in yoko.json():
+                print(j['archive_url'],"***",j['name'],"***",j['created_at'],"***",j['contents_url'])
+                # k=requests.get('https://api.github.com/users/%s/repos' % p_form.cleaned_data.get('github'))
             #     GithubRespo(profile=request.user.profile,Repso=j)
             p_form.save()
 

@@ -41,13 +41,15 @@ class Comments(models.Model):
 		ordering=['-time']
 
 class GithubRespo(models.Model):
-	profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
-	Respo=models.CharField( max_length=255)
-	Download=models.CharField(max_length=255)
-	time=models.DateField(auto_now=False, auto_now_add=False)
+    profile=models.ForeignKey(Profile, on_delete=models.CASCADE)
+    Respo=models.CharField( max_length=255)
+    files=models.CharField(max_length=255)
+    Download=models.CharField(max_length=255)
+    time=models.DateField(auto_now=False, auto_now_add=False)
+
 	
-	class Meta:
-		ordering=['-time']
+    class Meta:
+        ordering=['-time']
 
 
 
