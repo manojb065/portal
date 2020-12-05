@@ -26,11 +26,12 @@ class projectdb(models.Model):
 
 
     def __str__(self):
-        return self.name
+        return "{} - {}".format(self.name,self.title)
 
     def delete(self, *args, **kwargs):
         path = "TeamFiles"
-        shutil.rmtree(os.path.join(settings.MEDIA_ROOT, path, self.name))
+        if os.path.isdir(os.path.join(settings.MEDIA_ROOT, path, self.name)):
+            shutil.rmtree(os.path.join(settings.MEDIA_ROOT, path, self.name))
         super().delete(*args, **kwargs)  # Call the "real" save() method.
 
 class projectFiles(models.Model):

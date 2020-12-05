@@ -12,11 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" >
     <link rel="stylesheet" href="{% static 'blog/css/style1.css' %}">
-    {% if title %}
-        <title>Project Portal - {{title}}</title>
-    {% else %}
         <title>Project Portal</title>
-    {% endif %}
  {% block add %}
       {% endblock %}
 </head>
@@ -33,6 +29,10 @@
                     <li class="nav-item active">
                       <a class="nav-link" href="{% url 'blog-home' %}"><i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a>
                     </li>
+                      {% else %}
+                      <li class="nav-item active">
+                      <a href="{% url 'about'  %}" class="btn text-white m-2"><i class="fab fa-github"></i> Github</a>
+                    </li>
                       {% endif %}
                    
 
@@ -45,6 +45,7 @@
                 </form>
               
                     {% if user.is_authenticated %}
+                    <a href="{% url 'about'  %}" class="btn text-white m-2"><i class="fab fa-github"></i> Github</a>
                     <a href="{% url 'user-posts' user %}" class="btn text-white m-2"><i class="fas fa-user-shield"></i> My Post</a>
                     <a href="{% url 'team:list' %}" class="btn text-white m-2"><i class="fas fa-users"></i> Team </a>
                     <a href="{% url 'team:add' %}" class="btn text-white m-2"><i class="fas fa-user-plus"></i> New Team </a>

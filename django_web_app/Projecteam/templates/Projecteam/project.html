@@ -22,7 +22,7 @@ allowClear: true
    });
 });
   </script>
-    <title></title>
+    <title>Project Portal</title>
   </head>
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -61,11 +61,10 @@ allowClear: true
               </nav>
 <center>
 <div class="team-box">
-        <form method="POST" enctype="multipart/form-data" > {% csrf_token %}
+        <form method="POST"  > {% csrf_token %}
         <h1>Create Team</h1>
         <input type="text" name="title" placeholder="Title">
         <input type="text" name="name" placeholder="Team Name">
-        <input type="file" name="file" placeholder="">
       <select class="user" id="idOfFirstSelect" name="members" multiple style="width: 100%">
         {% for i,j in list %}
         <option value={{i}}>{{j}}</option>-->

@@ -7,7 +7,7 @@
             <div class="card-body">
 
                 <p class="card-text" style="font-size: 40px;"><strong><em>{{ i.title }}</em></strong>&nbsp;</p>
-                <p style="font-size: 23px;"><strong>Our team {{ i.name }}</strong></p>
+                <p style="font-size: 23px;"><strong>Team {{ i.name }}</strong></p>
                 <p><i class="fa fa-user"></i>&nbsp;{{ i.leader }}</p>
                 <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' i.name %}'">View</button>
 
@@ -19,7 +19,7 @@
             <div class="card-body">
 
                 <p class="card-text" style="font-size: 40px;"><strong><em>{{ j.title }}</em></strong>&nbsp;</p>
-                <p style="font-size: 23px;"><strong>Our team {{ j.name }}</strong></p>
+                <p style="font-size: 23px;"><strong>Team {{ j.name }}</strong></p>
                 <p><i class="fa fa-user"></i>&nbsp;{{ j.leader }}</p>
                 <button class="btn btn-primary"  type="button" onclick="location.href='{% url 'team:detail' j.name %}'">View</button>
 
@@ -31,7 +31,29 @@
 
     </div>
     {% endfor %}
+{% if qu %}
+{% if page_obj %}
 
+      {% if page_obj.has_previous %}
+        <a class="btn btn-outline-info mb-4" href="?q={{ q }}&page=1">First</a>
+        <a class="btn btn-outline-info mb-4" href="?q={{ q }}&page={{ page_obj.previous_page_number }}">Previous</a>
+      {% endif %}
+
+      {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+          <a class="btn btn-info mb-4" href="?q={{ q }}&page={{ num }}">{{ num }}</a>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+          <a class="btn btn-outline-info mb-4" href="?q={{ q }}&page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a class="btn btn-outline-info mb-4" href="?q={{ q }}&page={{ page_obj.next_page_number }}">Next</a>
+        <a class="btn btn-outline-info mb-4" href="?q={{ q }}&page={{ page_obj.paginator.num_pages }}">Last</a>
+      {% endif %}
+
+    {% endif %}
+{% else %}
 {% if page_obj %}
 
       {% if page_obj.has_previous %}
@@ -53,4 +75,6 @@
       {% endif %}
 
     {% endif %}
+
+{% endif %}
 {% endblock %}

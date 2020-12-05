@@ -47,11 +47,12 @@ class gitrep(models.Model):
 	files = models.CharField(max_length=255)
 	download = models.CharField(max_length=255)
 	time = models.DateField(auto_now=False, auto_now_add=False)
+	rpid=models.CharField(max_length=255)
 
 	class Meta:
 		ordering = ['-time']
 	def __str__(self):
-		return self.respo
+		return '{} - {}'.format(self.respo,self.profile.user.username)
 
 
 

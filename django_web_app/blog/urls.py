@@ -7,7 +7,7 @@ from .views import (
     PostDeleteView,
     UserPostListView,
     AddComments,
-  about
+  about,gitDetails,gitsearch
 )
 from . import views
 
@@ -20,6 +20,8 @@ urlpatterns = [
     path('post/<int:pk>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('media/Files/<int:pk>',PostDeleteView.as_view(),name='post-delete' ),
     path('search/',views.search,name='search' ),
+    path('gse/',gitsearch,name="gs"),
     path('comment/<int:pk>',AddComments,name='comments'),
-path('about/',about),
+    path('about/',about,name="about"),
+    path('det/<str:id>',gitDetails,name="gitdetails")
 ]

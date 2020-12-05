@@ -1,5 +1,6 @@
 import os
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from .models import projectdb,projectFiles
@@ -9,7 +10,8 @@ from .forms import TeamCreations
 
 def TeamCreate(request):
     if request.method =="POST":
-        form=TeamCreations(request.POST,request.FILES)
+        form=TeamCreations(request.POST)
+        print('entered')
         if form.is_valid():
             db=projectdb(name=form.cleaned_data['name'],
                       title=form.cleaned_data['title'],
@@ -17,12 +19,24 @@ def TeamCreate(request):
                     status=form.cleaned_data['status'],
                       member=request.POST.getlist('members'))
             db.save()
-            dbf=projectFiles(user=db,file=form.cleaned_data['file'])
-            dbf.save()
+            recp=[request.user.email]
+            for i in db.member:
+                recp.append(User.objects.filter(username__icontains=i).first().email)
+
+            send_mail(
+                'team created',
+                'you  have been selected to  {} project under the leadership of {}'.format(db.title,request.user),
+                None,
+                recp,
+                fail_silently=False, )
             return redirect("team:list")
     userteam=projectdb.objects.filter(Q(member__contains=[request.user])|Q(leader=request.user))
     form=TeamCreations()
-    context={'list':form.choose,'form':form}
+    choose = []
+    res = User.objects.all()
+    for i in res:
+        choose.append((str(i.username), str(i.username)))
+    context={'list':choose,'form':form}
     return render(request,"Projecteam/project.html",context)
 
 def TeamList(request):
@@ -52,7 +66,11 @@ def teamDetail(request,name):
     for i in Files:
         filename.append(str(os.path.basename(str(i.file))).strip(" "))
     Files=list(zip(filename,Files))
-    context={"details":details,"files":Files,"lead":lead,"mem":mem}
+    members=""
+    for i in range(len(details.member)-1):
+        members+=details.member[i]+" ,"
+    members+=" "+details.member[len(details.member)-1]
+    context={"details":details,"files":Files,"lead":lead,"mem":mem,'members':members}
     return render(request,"Projecteam/details.html",context)
 
 
@@ -82,7 +100,7 @@ def search(request):
     paginator = Paginator(alist, 2)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {"page_obj": page_obj}
+    context = {"page_obj": page_obj,'qu':True,'q':obj}
     return render(request, "Projecteam/teamlist.html", context)
 
 def memeberTeam(request):
@@ -100,6 +118,15 @@ def memeberTeam(request):
 
 def delTeam(request,id):
     res=projectdb.objects.filter(id=id).first()
+    recp=[]
+    for i in res.member:
+        recp.append(User.objects.filter(username__icontains=i).first().email)
+    send_mail(
+        'Team Terminated',
+        'team has been deleted by leader {}'.format(request.user),
+        None,
+        recp,
+        fail_silently=False, )
     res.delete()
     return redirect("team:mlist")
 

@@ -25,7 +25,7 @@ def register(request):
         form = UserRegisterForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Your account has been created! You are now able to log in')
+            messages.success(request, f'Your account has been created! You  have successfully logged in')
             return redirect('login')
         else:
             for i in form.error_messages.values():
@@ -48,9 +48,10 @@ def profile(request):
             user=p_form.cleaned_data.get('github')
             yoko = requests.get('https://api.github.com/users/%s/repos' %user)
             for j in yoko.json():
-                a_url='https://api.github.com/repos/{u}/{k}/zipball/master'.format(u=user,k=j['name'])
-                c_url= "https://api.github.com/repos/{}/{}/git/trees/master?recursive=1".format(p_form.cleaned_data.get('github'), j['name'])
-                GithubRespo(profile=request.user.profile,respo=j['name'],files=c_url ,download=a_url,time=j['created_at'][:10] ).save()
+                if not GithubRespo.objects.filter(respo__icontains=j['name']).first():
+                    a_url='https://api.github.com/repos/{u}/{k}/zipball/master'.format(u=user,k=j['name'])
+                    c_url= "https://api.github.com/repos/{}/{}/git/trees/master".format(p_form.cleaned_data.get('github'), j['name'])
+                    GithubRespo(profile=request.user.profile,respo=j['name'],files=c_url ,download=a_url,time=j['created_at'][:10],rpid=j['id']).save()
             p_form.save()
 
             messages.success(request, f'Your account has been updated!')

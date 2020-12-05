@@ -15,6 +15,19 @@
         </article>
 
     {% endfor %}
+{% for post in git %}
+        <article class="media content-section">
+          <img class="rounded-circle article-img" src="{{ post.profile.image.url }}">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-4" href="#">{{ author }}</a>
+              <small class="text-muted">{{ post.time|date:"F d, Y" }}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'gitdetails' post.rpid %}">{{ post.profile.github }}/{{ post.respo }}</a></h2>
+          </div>
+        </article>
+
+    {% endfor %}
     {% if is_paginated %}
 
       {% if page_obj.has_previous %}
