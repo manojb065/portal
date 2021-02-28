@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5f388ef5-e0c8-483f-8373-f7853963b261" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_web_app/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_web_app/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_web_app/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_web_app/users/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_web_app/Projecteam/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_web_app/Projecteam/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,16 +30,16 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../first" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\manoj\Desktop\pbl\django_web_app\Projecteam\static\Projecteam" />
       <recent name="C:\Users\manoj\Desktop\pbl\django_web_app\blog\static\blog\css" />
       <recent name="C:\Users\manoj\Desktop\pbl\django_web_app\static" />
       <recent name="C:\Users\manoj\Desktop\pbl\django_web_app" />
       <recent name="C:\Users\manoj\Desktop\pbl\django_web_app\blog" />
-      <recent name="C:\Users\manoj\Desktop\pbl\django_web_app\static\blog" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -67,6 +65,14 @@
       <option name="presentableId" value="Default" />
       <updated>1603719128363</updated>
     </task>
+    <task id="LOCAL-00001" summary="phase-2">
+      <created>1606896025139</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1606896025139</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -74,10 +80,16 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="phase-2" />
+    <option name="LAST_COMMIT_MESSAGE" value="phase-2" />
   </component>
 </project>

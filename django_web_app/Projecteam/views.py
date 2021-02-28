@@ -13,6 +13,7 @@ def TeamCreate(request):
         form=TeamCreations(request.POST)
         print('entered')
         if form.is_valid():
+            print(form.cleaned_data['status'],"***************")
             db=projectdb(name=form.cleaned_data['name'],
                       title=form.cleaned_data['title'],
                       leader=request.user,
@@ -28,9 +29,8 @@ def TeamCreate(request):
                 'you  have been selected to  {} project under the leadership of {}'.format(db.title,request.user),
                 None,
                 recp,
-                fail_silently=False, )
+                fail_silently=True, )
             return redirect("team:list")
-    userteam=projectdb.objects.filter(Q(member__contains=[request.user])|Q(leader=request.user))
     form=TeamCreations()
     choose = []
     res = User.objects.all()
@@ -41,6 +41,7 @@ def TeamCreate(request):
 
 def TeamList(request):
     projects=projectdb.objects.filter(status=True)
+    print(projects,"*************")
     alist = []
     for i in range(0, len(projects) - 1, 2):
         alist.append([projects[i], projects[i + 1]])
@@ -126,7 +127,7 @@ def delTeam(request,id):
         'team has been deleted by leader {}'.format(request.user),
         None,
         recp,
-        fail_silently=False, )
+        fail_silently=True, )
     res.delete()
     return redirect("team:mlist")
 
